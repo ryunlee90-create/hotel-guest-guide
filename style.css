@@ -1355,3 +1355,41 @@ body.search-open {
     letter-spacing: -0.6px;
   }
 }
+/* English Index Hero Mobile Fix */
+
+@media (max-width: 520px) {
+  .page-en-index .main-hero h1 {
+    font-size: 34px;
+    line-height: 1.16;
+    letter-spacing: -1.8px;
+    padding-right: 76px;
+  }
+
+  .page-en-index .main-hero .hero-logo {
+    width: 62px;
+    top: 22px;
+    right: 22px;
+    opacity: 0.78;
+  }
+
+  .page-en-index .main-hero p {
+    font-size: 15px;
+    line-height: 1.65;
+    padding-right: 0;
+  }
+}
+
+@media (max-width: 390px) {
+  .page-en-index .main-hero h1 {
+    font-size: 31px;
+    line-height: 1.18;
+    letter-spacing: -1.9px;
+    padding-right: 68px;
+  }
+
+  .page-en-index .main-hero .hero-logo {
+    width: 56px;
+    top: 24px;
+    right: 20px;
+  }
+}
