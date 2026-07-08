@@ -1359,3 +1359,20 @@ body.search-open {
     letter-spacing: -0.6px;
   }
 }
+/* English Index Hero Title Size */
+
+@media (max-width: 520px) {
+  .page-en-index .main-hero h1 {
+    font-size: 38px;
+    line-height: 1.18;
+    letter-spacing: -1.6px;
+  }
+}
+
+@media (max-width: 390px) {
+  .page-en-index .main-hero h1 {
+    font-size: 36px;
+    line-height: 1.18;
+    letter-spacing: -1.7px;
+  }
+}
