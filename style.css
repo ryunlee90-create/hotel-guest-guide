@@ -433,11 +433,31 @@ input {
 
 .benefit-card {
   display: grid;
-  grid-template-columns: 48px 1fr;
+  grid-template-columns: 48px 1fr auto;
   gap: 14px;
-  align-items: start;
+  align-items: center;
   padding: 20px 18px;
   border-bottom: 1px solid #eee7dd;
+}
+.benefit-info {
+  min-width: 0;
+}
+.benefit-link {
+  min-height: 38px;
+  padding: 0 13px;
+  border-radius: 12px;
+  background: #17202b;
+  color: #fff;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 13px;
+  font-weight: 800;
+  white-space: nowrap;
+}
+
+.benefit-link:active {
+  transform: scale(0.985);
 }
 
 .benefit-card:last-child {
@@ -1192,6 +1212,11 @@ body.search-open {
     grid-template-columns: 44px 1fr;
     padding: 19px 18px;
   }
+  .benefit-link {
+  grid-column: 2;
+  justify-self: start;
+  margin-top: 4px;
+}
 
   .benefit-title {
     font-size: 18px;
