@@ -363,73 +363,119 @@
   </main>
 
   <script>
-    const stayTabs = document.querySelectorAll('.stay-tab');
-    const stayPanels = document.querySelectorAll('.stay-panel');
+  const stayTabs = document.querySelectorAll('.stay-tab');
+  const stayPanels = document.querySelectorAll('.stay-panel');
+  const diningTabs = document.querySelectorAll('.dining-tab');
+  const diningPanels = document.querySelectorAll('.dining-panel');
 
-    const stayHashMap = {
-      '#check': 'stay',
-      '#wifi': 'room',
-      '#room-guide': 'room',
-      '#breakfast': 'dining',
-      '#cafe': 'cafe',
-      '#parking': 'parking'
-    };
+  const stayHashMap = {
+    '#check': { stay: 'stay' },
+    '#wifi': { stay: 'room' },
+    '#room-guide': { stay: 'room' },
+    '#breakfast': { stay: 'dining', dining: 'breakfast' },
+    '#cafe': { stay: 'dining', dining: 'cafe' },
+    '#parking': { stay: 'parking' }
+  };
 
-    function activateStayTab(target, shouldTrack) {
-      stayTabs.forEach(function(item) {
-        item.classList.remove('is-active');
-        item.setAttribute('aria-selected', 'false');
-      });
-
-      stayPanels.forEach(function(panel) {
-        panel.classList.remove('is-active');
-        panel.hidden = true;
-      });
-
-      const activeTab = document.querySelector('[data-stay-tab="' + target + '"]');
-      const activePanel = document.querySelector('[data-stay-panel="' + target + '"]');
-
-      if (activeTab) {
-        activeTab.classList.add('is-active');
-        activeTab.setAttribute('aria-selected', 'true');
-      }
-
-      if (activePanel) {
-        activePanel.hidden = false;
-        activePanel.classList.add('is-active');
-      }
-
-      if (shouldTrack) {
-        window.dataLayer = window.dataLayer || [];
-        window.dataLayer.push({
-          event: 'stay_tab_click',
-          stay_tab: target
-        });
-      }
-    }
-
-    stayTabs.forEach(function(tab) {
-      tab.addEventListener('click', function() {
-        const target = tab.dataset.stayTab;
-        activateStayTab(target, true);
-      });
+  function activateStayTab(target, shouldTrack) {
+    stayTabs.forEach(function(item) {
+      item.classList.remove('is-active');
+      item.setAttribute('aria-selected', 'false');
     });
 
-    const initialTarget = stayHashMap[window.location.hash];
+    stayPanels.forEach(function(panel) {
+      panel.classList.remove('is-active');
+      panel.hidden = true;
+    });
 
-    if (initialTarget) {
-      activateStayTab(initialTarget, false);
+    const activeTab = document.querySelector('[data-stay-tab="' + target + '"]');
+    const activePanel = document.querySelector('[data-stay-panel="' + target + '"]');
 
-      const hashTarget = document.querySelector(window.location.hash);
-      if (hashTarget) {
-        setTimeout(function() {
-          hashTarget.scrollIntoView({
-            behavior: 'auto',
-            block: 'start'
-          });
-        }, 80);
-      }
+    if (activeTab) {
+      activeTab.classList.add('is-active');
+      activeTab.setAttribute('aria-selected', 'true');
     }
-  </script>
+
+    if (activePanel) {
+      activePanel.hidden = false;
+      activePanel.classList.add('is-active');
+    }
+
+    if (shouldTrack) {
+      window.dataLayer = window.dataLayer || [];
+      window.dataLayer.push({
+        event: 'stay_tab_click',
+        stay_tab: target
+      });
+    }
+  }
+
+  function activateDiningTab(target, shouldTrack) {
+    diningTabs.forEach(function(item) {
+      item.classList.remove('is-active');
+      item.setAttribute('aria-selected', 'false');
+    });
+
+    diningPanels.forEach(function(panel) {
+      panel.classList.remove('is-active');
+      panel.hidden = true;
+    });
+
+    const activeTab = document.querySelector('[data-dining-tab="' + target + '"]');
+    const activePanel = document.querySelector('[data-dining-panel="' + target + '"]');
+
+    if (activeTab) {
+      activeTab.classList.add('is-active');
+      activeTab.setAttribute('aria-selected', 'true');
+    }
+
+    if (activePanel) {
+      activePanel.hidden = false;
+      activePanel.classList.add('is-active');
+    }
+
+    if (shouldTrack) {
+      window.dataLayer = window.dataLayer || [];
+      window.dataLayer.push({
+        event: 'dining_tab_click',
+        dining_tab: target
+      });
+    }
+  }
+
+  stayTabs.forEach(function(tab) {
+    tab.addEventListener('click', function() {
+      const target = tab.dataset.stayTab;
+      activateStayTab(target, true);
+    });
+  });
+
+  diningTabs.forEach(function(tab) {
+    tab.addEventListener('click', function() {
+      const target = tab.dataset.diningTab;
+      activateDiningTab(target, true);
+    });
+  });
+
+  const initialTarget = stayHashMap[window.location.hash];
+
+  if (initialTarget) {
+    activateStayTab(initialTarget.stay, false);
+
+    if (initialTarget.dining) {
+      activateDiningTab(initialTarget.dining, false);
+    }
+
+    const hashTarget = document.querySelector(window.location.hash);
+    if (hashTarget) {
+      setTimeout(function() {
+        hashTarget.scrollIntoView({
+          behavior: 'auto',
+          block: 'start'
+        });
+      }, 80);
+    }
+  }
+</script>
 </body>
 </html>
